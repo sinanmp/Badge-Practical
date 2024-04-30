@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Delegation Example</title>
+<style>
+  ul {
+    list-style-type: none;
+  }
+  li {
+    cursor: pointer;
+  }
+  .highlight {
+    background-color: yellow;
+  }
+</style>
+</head>
+<body>
+
+<ul id="parent-list">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+  <li>Item 4</li>
+  <li>Item 5</li>
+</ul>
+
+<script>
+document.getElementById('parent-list').addEventListener('click', function(event) {
+    const items = document.getElementsByTagName('li');
+    Array.from(items).forEach((item)=>{
+        item.classList.remove('highlight');
+    });
+    if (event.target.tagName === 'LI') {
+        event.target.classList.add('highlight');
+    }
+});
+</script>
+
+</body>
+</html>

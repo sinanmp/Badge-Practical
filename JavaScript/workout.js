@@ -51,11 +51,12 @@
 // console.log(arr)
 
 
-const array1 = [1, 2, 3];
-const array2 = [...array1]; // Copying array1 to array2
+// const array1 = [1, 2, 3];
+// const array2 = [...array1]; // Copying array1 to array2
 
 // Concatenating arrays
-const array3 = [4, 5, 6];
-const concatenatedArray = [...array1, ...array3];
+// const array3 = [4, 5, 6];
+// const concatenatedArray = [...array1, ...array3];
 
-console.log(concatenatedArray)
+// console.log(concatenatedArray)
+

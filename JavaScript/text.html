@@ -3,39 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Event Delegation Example</title>
+<title>Event Propagation Example</title>
 <style>
-  ul {
-    list-style-type: none;
-  }
-  li {
-    cursor: pointer;
-  }
-  .highlight {
-    background-color: yellow;
-  }
+    .parent {
+        width: 200px;
+        height: 200px;
+        background-color: #f0f0f0;
+        padding: 20px;
+        margin: 20px;
+    }
+    .child {
+        width: 100px;
+        height: 100px;
+        background-color: #ccc;
+        padding: 20px;
+    }
 </style>
 </head>
 <body>
 
-<ul id="parent-list">
-  <li>Item 1</li>
-  <li>Item 2</li>
-  <li>Item 3</li>
-  <li>Item 4</li>
-  <li>Item 5</li>
-</ul>
+<div class="parent" id="parent">
+    <div class="child" id="child">Click me</div>
+</div>
 
 <script>
-document.getElementById('parent-list').addEventListener('click', function(event) {
-    const items = document.getElementsByTagName('li');
-    Array.from(items).forEach((item)=>{
-        item.classList.remove('highlight');
+    // Add event listener to the parent element
+    document.getElementById('parent').addEventListener('click', function(event) {
+        console.log('Parent element clicked');
+        // console.log('Event target:', event.target);
+        // console.log('Event current target:', event.currentTarget);
     });
-    if (event.target.tagName === 'LI') {
-        event.target.classList.add('highlight');
-    }
-});
+
+    // Add event listener to the child element
+    document.getElementById('child').addEventListener('click', function(event) {
+        console.log('Child element clicked');
+        // console.log('Event target:', event.target);
+        // console.log('Event current target:', event.currentTarget);
+        // Stop event propagation (optional)
+        event.stopPropagation();
+    });
 </script>
 
 </body>

@@ -1,2 +1,1 @@
-
-let removedArr = arr.slice(2)
+largest

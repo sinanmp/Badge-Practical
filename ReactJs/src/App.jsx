@@ -1,40 +1,53 @@
-import { useState } from 'react'
-import './App.css'
+import React, { useState } from 'react';
 
-function App() {
-  const [sub, setSub] = useState([])
+const NestedDropdown = () => {
+  // Define the state
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedItem, setSelectedItem] = useState('');
 
-  const option =  [
-    {
-      category: 'Fruits',
-      items: ['Apple', 'Banana', 'Orange', 'Grapes']
-    },
-    {
-      category: 'Vegetables',
-      items: ['Carrot', 'Broccoli', 'Lettuce', 'Tomato']
-    }
-  ]
+  // Define the options
+  const options = {
+    Fruits: ["Apple", "Banana", "Orange"],
+    Vegetables: ["Carrot", "Broccoli", "Spinach"],
+    Grains: ["Rice", "Wheat", "Barley"]
+  };
+
+  // Handle the selection of the first dropdown
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+    setSelectedItem(''); // Reset the second dropdown when the first one changes
+  };
+
+  // Handle the selection of the second dropdown
+  const handleItemChange = (event) => {
+    setSelectedItem(event.target.value);
+  };
 
   return (
-    <>
-     <div style={{display:'flex' , justifyContent:'center'}}>
-          <select name="" id="">
-           {option.map((item)=>{
-            return(
-              <option onClick={()=>setSub(item.items)} value={item.category}>{item.category}</option>
-            )
-           })}
-          </select>
-          {sub &&  
-          <select name="" id="">
-            {sub.map((item)=>{
-              <option key={item} value={item}>{item}</option>
-            })}
-          </select>
-          }
-     </div>
-    </>
-  )
-}
+    <div>
+      {/* First Dropdown */}
+      <select value={selectedCategory} onChange={handleCategoryChange}>
+        <option value="">Select Category</option>
+        {Object.keys(options).map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
 
-export default App
+      {/* Second Dropdown */}
+      {selectedCategory && (
+        <select value={selectedItem} onChange={handleItemChange}>
+          <option value="">Select Item</option>
+          {options[selectedCategory].map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+      )}
+    </div>
+  );
+};
+
+export default NestedDropdown;

@@ -1,46 +1,121 @@
 class Node{
-    constructor(data){
-        this.data = data,
+    constructor(value){
+        this.value = value
         this.next = null
     }
 }
 
 
-class List{
+class LinkedList{
     constructor(){
         this.head = null
+        this.tail = null
     }
 
-    append(data){
-        const newNode = new Node(data)
+
+    add(value){
+        const newNode = new Node(value)
+
         if(!this.head){
             this.head = newNode
+            this.tail = newNode
         }else{
-            let current = this.head 
-            while(current.next){
-                current = current.next
-            }
-            current.next = newNode
+            this.tail.next = newNode
+            this.tail = newNode
         }
     }
 
-    remove(data){
+
+    delete(value){
         if(!this.head){
-            return console.log('no data in the list ')
+            return console.log('sorry the list has empty')
         }
 
-        if(this.head.data == data){
-            this.head = this.head.next 
-            return console.log(`${data} removed`)
+        if(this.head.value == value){
+            const deletedNode = this.head
+            this.head = this.head.next
+            if(this.tail == deletedNode){
+                this.tail = null
+            }
+            return console.log(deletedNode , 'deleted successfully')
         }
 
         let current = this.head
-        while(current.next){
-            if(current.data == data){
-              current.next = current.next.next
-            }else{
-              current = current.next
+
+        while(current){
+            if(current.next.value == value){
+                let deletedNode = current.next
+                current.next = current.next.next
+                if(deletedNode == this.tail){
+                    console.log(current ,'this is current')
+                    this.tail = current
+                }
+                break
             }
+            current = current.next
         }
     }
+
+    printList(){
+        let current = this.head
+        while(current){
+            console.log(current.value)
+            current = current.next
+        }
+    }
+
+
+    addTospecificSpace(index , value){
+        let newNode = new Node(value)
+
+        if(index==0){
+            newNode.next = this.head
+            this.head = newNode
+            return
+        }
+
+        let counter = 0
+        let current = this.head
+        let previous = null
+        while(current){
+            if(counter == index){
+                newNode.next = current
+                previous.next = newNode
+                console.log('entered')
+                break
+            }
+            previous = current
+            current = current.next
+            counter++
+        }
+        
+       }
+
+
+       findMiddle(){
+        let slow = this.head
+        let fast = this.head
+
+        while(fast && fast.next){
+            slow = slow.next
+            fast = fast.next.next
+        }
+        return slow
+       }
 }
+
+
+const list = new LinkedList()
+
+
+list.add(4)
+list.add(10)
+list.add(8)
+list.add(7)
+list.add(3)
+
+
+list.addTospecificSpace(0,100)
+list.printList()
+console.log(list.findMiddle())
+

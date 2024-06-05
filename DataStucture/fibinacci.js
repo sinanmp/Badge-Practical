@@ -15,3 +15,6 @@ function displayFibonacciSeries(numTerms) {
 
 // Example: Displaying the first 10 terms of the Fibonacci series
 displayFibonacciSeries(10);
+
+
+

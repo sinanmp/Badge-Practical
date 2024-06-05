@@ -1,1 +1,1 @@
-
+       node = node.children[char]
